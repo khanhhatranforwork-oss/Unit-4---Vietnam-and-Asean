@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Từ vựng: Unit 4 - Vietnam and Asian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12301f;
+    --ink-soft:#3f5548;
+    --paper:#eef3ec;
+    --card:#ffffff;
+    --amber:#c8871a;
+    --amber-deep:#a86e10;
+    --good:#1f7a4d;
+    --good-bg:#e3f3e8;
+    --bad:#b23b2e;
+    --bad-bg:#fbe7e3;
+    --line: rgba(18,48,31,0.16);
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:32px 16px 64px;
+    line-height:1.5;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px);
+    background-size: 100% 120px;
+    opacity:0.35;
+    z-index:0;
+  }
+  .wrap{ position:relative; z-index:1; width:100%; max-width:620px; }
+  header.top{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:22px; gap:12px;
+  }
+  header.top h1{
+    font-family:var(--serif); font-size:20px; font-weight:600; margin:0; letter-spacing:-0.01em;
+  }
+  header.top .tag{ font-size:13px; color:var(--ink-soft); white-space:nowrap; }
+  .progress-track{
+    height:6px; background:rgba(18,48,31,0.12); border-radius:3px; overflow:hidden; margin-bottom:36px;
+  }
+  .progress-fill{ height:100%; background:var(--amber); width:0%; transition:width .35s ease; }
+
+  .card{ background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:32px 28px; }
+  .qmeta{ display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--ink-soft); margin-bottom:18px; }
+  .prompt-label{ font-size:13px; color:var(--ink-soft); margin-bottom:6px; }
+  .term{ font-family:var(--serif); font-size:26px; font-weight:700; line-height:1.25; margin:0 0 6px; }
+  .ipa{ font-size:15px; color:var(--amber-deep); margin:0 0 26px; font-weight:500; }
+
+  .choices{ display:flex; flex-direction:column; gap:10px; }
+  .choice-btn{
+    text-align:left; background:var(--card); border:1.5px solid var(--ink); border-radius:5px;
+    padding:13px 16px; font-family:var(--sans); font-size:15px; color:var(--ink); cursor:pointer;
+    transition:background .15s ease;
+  }
+  .choice-btn:hover:not(:disabled){ background:#f1ede1; }
+  .choice-btn:disabled{ cursor:default; }
+  .choice-btn.correct{ background:var(--good-bg); border-color:var(--good); color:var(--good); font-weight:600; }
+  .choice-btn.wrong{ background:var(--bad-bg); border-color:var(--bad); color:var(--bad); font-weight:600; }
+
+  .feedback{ margin-top:20px; padding-top:18px; border-top:1px dashed var(--line); display:none; }
+  .feedback.show{ display:block; }
+  .fb-verdict{ font-weight:700; font-size:15px; margin-bottom:8px; }
+  .fb-verdict.good{ color:var(--good); }
+  .fb-verdict.bad{ color:var(--bad); }
+  .fb-meaning{ font-size:15px; }
+  .fb-example{ font-size:14px; color:var(--ink-soft); font-style:italic; margin-top:6px; }
+  .next-btn{
+    margin-top:20px; width:100%; font-family:var(--sans); font-weight:700; font-size:15px;
+    padding:13px; background:var(--amber); color:#2a1c02; border:none; border-radius:5px; cursor:pointer;
+  }
+  .next-btn:hover{ background:var(--amber-deep); color:#fff; }
+
+  .results h2{ font-family:var(--serif); font-size:28px; margin:0 0 6px; }
+  .score-big{ font-family:var(--serif); font-size:56px; font-weight:700; color:var(--amber-deep); margin:14px 0 4px; }
+  .score-sub{ color:var(--ink-soft); font-size:14px; margin-bottom:26px; }
+  .review-list{ list-style:none; padding:0; margin:0 0 24px; display:flex; flex-direction:column; gap:10px; }
+  .review-list li{ border-left:3px solid var(--bad); padding:8px 14px; background:var(--bad-bg); border-radius:0 4px 4px 0; font-size:14px; }
+  .review-list li b{ font-family:var(--serif); font-size:15px; }
+  .no-wrong{ font-size:14px; color:var(--good); margin-bottom:24px; }
+  .restart-btn{
+    width:100%; font-family:var(--sans); font-weight:700; font-size:15px; padding:14px;
+    background:var(--ink); color:var(--paper); border:none; border-radius:5px; cursor:pointer;
+  }
+
+  @media (max-width:480px){
+    .card{ padding:24px 18px; }
+    .term{ font-size:21px; }
+    .score-big{ font-size:44px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Từ vựng: Unit 4 - Vietnam and Asian</h1>
+    <span class="tag" id="counterTag">1 / 60</span>
+  </header>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="card" id="quizCard"></div>
+</div>
+
+<script>
+const VOCAB = [
+{term:"stilt house",ipa:"/stɪlt haʊs/",meaning:"nhà sàn",example:"Many ethnic minority families live in a stilt house."},
+{term:"stilt walking",ipa:"/stɪlt ˈwɔːkɪŋ/",meaning:"đi cà kheo",example:"Stilt walking is a traditional performance at festivals."},
+{term:"tug of war",ipa:"/tʌɡ əv wɔːr/",meaning:"kéo co",example:"Tug of war is a popular game during Tet holiday."},
+{term:"bamboo dancing",ipa:"/bæmˈbuː ˈdænsɪŋ/",meaning:"múa sạp",example:"Bamboo dancing is performed at many cultural festivals."},
+{term:"disability / disabled",ipa:"/ˌdɪsəˈbɪləti / dɪsˈeɪbld/",meaning:"sự tàn tật → bị khuyết tật",example:"The building was designed for people with disabilities."},
+{term:"represent / representative",ipa:"/ˌreprɪˈzent / ˌreprɪˈzentətɪv/",meaning:"đại diện / tiêu biểu, người đại diện",example:"She was chosen to represent her school at the competition."},
+{term:"gender equality",ipa:"/ˈdʒendər ɪˈkwɒləti/",meaning:"bình đẳng giới",example:"The country has made progress in gender equality."},
+{term:"eye-opening",ipa:"/aɪ ˈoʊpənɪŋ/",meaning:"mở mang tầm mắt",example:"The trip was an eye-opening experience for the students."},
+{term:"strengthen",ipa:"/ˈstreŋθn/",meaning:"củng cố, tăng cường",example:"The two countries agreed to strengthen their cooperation."},
+{term:"achieve / reach a goal",ipa:"/əˈtʃiːv / riːtʃ ə ɡoʊl/",meaning:"đạt được mục tiêu",example:"She worked hard to achieve her goal."},
+{term:"life experience",ipa:"/laɪf ɪkˈspɪriəns/",meaning:"kinh nghiệm sống",example:"Traveling gives you valuable life experience."},
+{term:"participate in / take part in",ipa:"/pɑːrˈtɪsɪpeɪt ɪn/",meaning:"tham gia vào",example:"Students are encouraged to participate in the event."},
+{term:"contribute to / make a contribution to",ipa:"/kənˈtrɪbjuːt tuː/",meaning:"đóng góp cho",example:"Volunteers contribute to the success of the festival."},
+{term:"promote / promotion / promotional",ipa:"/prəˈmoʊt / prəˈmoʊʃn / prəˈmoʊʃənl/",meaning:"thúc đẩy / sự thúc đẩy / thuộc quảng cáo",example:"The campaign aims to promote cultural exchange."},
+{term:"cultural exchange",ipa:"/ˈkʌltʃərəl ɪksˈtʃeɪndʒ/",meaning:"giao lưu văn hóa",example:"The program focuses on cultural exchange between students."},
+{term:"current issues",ipa:"/ˈkɜːrənt ˈɪʃuːz/",meaning:"các vấn đề hiện tại",example:"The conference discussed current issues in education."},
+{term:"leadership skills",ipa:"/ˈliːdərʃɪp skɪlz/",meaning:"kỹ năng lãnh đạo",example:"The program helps students develop leadership skills."},
+{term:"raise awareness of sth",ipa:"/reɪz əˈwernəs əv/",meaning:"nâng cao nhận thức về điều gì",example:"The campaign aims to raise awareness of climate change."},
+{term:"reply to sb/sth",ipa:"/rɪˈplaɪ tuː/",meaning:"trả lời ai/cái gì",example:"Please reply to my email as soon as possible."},
+{term:"invite sb to do sth",ipa:"/ɪnˈvaɪt tuː duː/",meaning:"mời ai làm gì",example:"They invited us to join the ceremony."},
+{term:"prepare for sth",ipa:"/prɪˈper fɔːr/",meaning:"chuẩn bị cho việc gì",example:"Students are preparing for the final exam."},
+{term:"be qualified for sth",ipa:"/biː ˈkwɒlɪfaɪd fɔːr/",meaning:"đủ tiêu chuẩn cho việc gì",example:"She is qualified for the scholarship program."},
+{term:"be keen on doing sth",ipa:"/biː kiːn ɒn/",meaning:"thích làm gì",example:"He is keen on learning new languages."},
+{term:"share sth with sb",ipa:"/ʃer wɪð/",meaning:"chia sẻ cái gì với ai",example:"She shared her experience with the class."},
+{term:"mind doing sth",ipa:"/maɪnd/",meaning:"ngại/phiền làm gì",example:"Would you mind opening the window?"},
+{term:"involve doing sth",ipa:"/ɪnˈvɒlv/",meaning:"bao gồm, đòi hỏi làm gì",example:"The job involves traveling a lot."},
+{term:"suggest doing sth",ipa:"/səˈdʒest/",meaning:"gợi ý làm gì",example:"He suggested visiting the museum first."},
+{term:"succeed in doing sth",ipa:"/səkˈsiːd ɪn/",meaning:"thành công trong việc làm gì",example:"She succeeded in passing the exam."},
+{term:"put out a call for sth",ipa:"/pʊt aʊt ə kɔːl fɔːr/",meaning:"kêu gọi cái gì",example:"The organization put out a call for volunteers."},
+{term:"make arrangements for sth",ipa:"/meɪk əˈreɪndʒmənts fɔːr/",meaning:"sắp xếp, chuẩn bị cho việc gì",example:"We made arrangements for the trip in advance."},
+{term:"be beneficial to sb/sth",ipa:"/biː ˌbenɪˈfɪʃl tuː/",meaning:"có lợi cho ai/cái gì",example:"Regular exercise is beneficial to your health."},
+{term:"besides + doing sth",ipa:"/bɪˈsaɪdz/",meaning:"ngoài việc làm gì ra",example:"Besides studying, she also works part-time."},
+{term:"scare away",ipa:"/sker əˈweɪ/",meaning:"xua đuổi",example:"Loud noises scared away the birds."},
+{term:"get together with sb",ipa:"/ɡet təˈɡeðər wɪð/",meaning:"gặp gỡ, tụ họp với ai",example:"We often get together with relatives during Tet."},
+{term:"show respect for sb/sth",ipa:"/ʃoʊ rɪˈspekt fɔːr/",meaning:"thể hiện sự tôn trọng với ai/cái gì",example:"Students should show respect for their teachers."},
+{term:"wash away",ipa:"/wɒʃ əˈweɪ/",meaning:"cuốn trôi",example:"The flood washed away several houses."},
+{term:"be excited about sth",ipa:"/biː ɪkˈsaɪtɪd əˈbaʊt/",meaning:"hào hứng với điều gì",example:"She is excited about the upcoming trip."},
+{term:"unforgettable",ipa:"/ˌʌnfərˈɡetəbl/",meaning:"khó quên",example:"It was an unforgettable experience."},
+{term:"host",ipa:"/hoʊst/",meaning:"đăng cai, chủ trì, tổ chức",example:"Vietnam hosted the international conference last year."},
+{term:"live-stream",ipa:"/laɪv striːm/",meaning:"phát trực tiếp",example:"The event was live-streamed on social media."},
+{term:"break the ice",ipa:"/breɪk ði aɪs/",meaning:"phá vỡ bầu không khí ngại ngùng",example:"He told a joke to break the ice at the meeting."},
+{term:"create bonds with people",ipa:"/kriˈeɪt bɒndz wɪð ˈpiːpl/",meaning:"tạo sự gắn kết với mọi người",example:"Traveling helps you create bonds with people from different cultures."},
+{term:"welcoming",ipa:"/ˈwelkəmɪŋ/",meaning:"hiếu khách, chào đón",example:"The local people are very welcoming to tourists."},
+{term:"honour ancestors",ipa:"/ˈɒnər ˈænsestərz/",meaning:"tôn kính tổ tiên",example:"Vietnamese families honour their ancestors during Tet."},
+{term:"prestigious",ipa:"/preˈstɪdʒəs/",meaning:"có uy tín, danh giá",example:"She studied at a prestigious university."},
+{term:"be awarded for sth",ipa:"/biː əˈwɔːrdɪd fɔːr/",meaning:"được trao giải vì điều gì",example:"He was awarded for his outstanding performance."},
+{term:"immerse yourself in",ipa:"/ɪˈmɜːrs jɔːrˈself ɪn/",meaning:"đắm mình vào",example:"Travelers can immerse themselves in local culture."},
+{term:"rich tapestry of traditions",ipa:"/rɪtʃ ˈtæpəstri əv trəˈdɪʃnz/",meaning:"bức tranh phong phú của các truyền thống",example:"Asia has a rich tapestry of traditions and customs."},
+{term:"bustling streets",ipa:"/ˈbʌslɪŋ striːts/",meaning:"những con phố nhộn nhịp",example:"The bustling streets of Hanoi are full of life."},
+{term:"be captivated by",ipa:"/biː ˈkæptɪveɪtɪd baɪ/",meaning:"bị mê hoặc, thu hút bởi",example:"Visitors are often captivated by the scenery."},
+{term:"turquoise waters",ipa:"/ˈtɜːrkwɔɪz ˈwɔːtərz/",meaning:"làn nước xanh ngọc",example:"The island is famous for its turquoise waters."},
+{term:"seamless travel / hassle-free border crossings",ipa:"/ˈsiːmləs ˈtrævl / ˈhæsl friː ˈbɔːrdər ˈkrɒsɪŋz/",meaning:"chuyến đi liền mạch / qua biên giới không rắc rối",example:"ASEAN aims to provide seamless travel for its citizens."},
+{term:"knowledgeable guides",ipa:"/ˈnɒlɪdʒəbl ɡaɪdz/",meaning:"hướng dẫn viên am hiểu",example:"The tour included knowledgeable guides who explained the history."},
+{term:"fascinating insights",ipa:"/ˈfæsɪneɪtɪŋ ˈɪnsaɪts/",meaning:"những hiểu biết sâu sắc, hấp dẫn",example:"The documentary offers fascinating insights into ancient cultures."},
+{term:"hidden gem",ipa:"/ˈhɪdn dʒem/",meaning:"điểm đến ít người biết nhưng đáng khám phá",example:"This small village is a hidden gem for travelers."},
+{term:"a deep dive into",ipa:"/ə diːp daɪv ˈɪntuː/",meaning:"đi sâu vào, tìm hiểu kỹ về",example:"The book takes a deep dive into Vietnamese history."},
+{term:"cultural nuances",ipa:"/ˈkʌltʃərəl ˈnuːɑːnsɪz/",meaning:"sắc thái văn hóa",example:"Understanding cultural nuances helps avoid misunderstandings."},
+{term:"navigate geopolitical complexities",ipa:"/ˈnævɪɡeɪt ˌdʒioʊpəˈlɪtɪkl kəmˈpleksətiz/",meaning:"xử lý những phức tạp địa chính trị",example:"Diplomats must navigate geopolitical complexities carefully."},
+{term:"pivotal role",ipa:"/ˈpɪvətl roʊl/",meaning:"vai trò then chốt",example:"Vietnam plays a pivotal role in ASEAN cooperation."},
+{term:"resilience",ipa:"/rɪˈzɪliəns/",meaning:"khả năng phục hồi, sức chống chịu",example:"The community showed great resilience after the disaster."}
+];
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+let order = [];
+let current = 0;
+let score = 0;
+let wrongItems = [];
+let answered = false;
+
+function startQuiz(){
+  order = shuffle(VOCAB);
+  current = 0;
+  score = 0;
+  wrongItems = [];
+  renderQuestion();
+}
+
+function buildChoices(correctItem){
+  const pool = VOCAB.filter(v=>v.meaning!==correctItem.meaning);
+  const distractors = shuffle(pool).slice(0,3).map(v=>v.meaning);
+  return shuffle([correctItem.meaning, ...distractors]);
+}
+
+function renderQuestion(){
+  answered = false;
+  const total = order.length;
+  document.getElementById('counterTag').textContent = (current+1)+" / "+total;
+  document.getElementById('progressFill').style.width = ((current)/total*100)+"%";
+
+  const item = order[current];
+  const card = document.getElementById('quizCard');
+
+  let bodyHtml = `
+    <div class="qmeta"><span>Câu ${current+1} / ${total}</span></div>
+    <div class="prompt-label">Cụm từ này có nghĩa là gì?</div>
+    <div class="term">${item.term}</div>
+    <div class="ipa">${item.ipa}</div>
+    <div class="choices" id="choicesBox">
+  `;
+  const choices = buildChoices(item);
+  choices.forEach(c=>{
+    bodyHtml += `<button class="choice-btn" data-answer="${encodeURIComponent(c)}" onclick="handleChoice(this)">${c}</button>`;
+  });
+  bodyHtml += `</div><div class="feedback" id="feedbackBox"></div>`;
+
+  card.innerHTML = bodyHtml;
+}
+
+function showFeedback(isCorrect, item){
+  const fb = document.getElementById('feedbackBox');
+  fb.classList.add('show');
+  fb.innerHTML = `
+    <div class="fb-verdict ${isCorrect?'good':'bad'}">${isCorrect ? 'Chính xác!' : 'Chưa đúng.'}</div>
+    <div class="fb-meaning">Nghĩa đúng: <strong>${item.meaning}</strong></div>
+    <div class="fb-example">Ví dụ: ${item.example}</div>
+  `;
+  const btn = document.createElement('button');
+  btn.className = 'next-btn';
+  btn.textContent = (current === order.length-1) ? 'Xem kết quả' : 'Câu tiếp theo';
+  btn.onclick = goNext;
+  fb.appendChild(btn);
+}
+
+function handleChoice(btn){
+  if(answered) return;
+  answered = true;
+  const item = order[current];
+  const chosen = decodeURIComponent(btn.getAttribute('data-answer'));
+  const isCorrect = chosen === item.meaning;
+
+  document.querySelectorAll('.choice-btn').forEach(b=>{
+    b.disabled = true;
+    const val = decodeURIComponent(b.getAttribute('data-answer'));
+    if(val === item.meaning) b.classList.add('correct');
+    else if(b===btn) b.classList.add('wrong');
+  });
+
+  if(isCorrect) score++;
+  else wrongItems.push(item);
+
+  showFeedback(isCorrect, item);
+}
+
+function goNext(){
+  if(current === order.length-1){
+    renderResults();
+  } else {
+    current++;
+    renderQuestion();
+  }
+}
+
+function renderResults(){
+  document.getElementById('progressFill').style.width = "100%";
+  document.getElementById('counterTag').textContent = order.length+" / "+order.length;
+  const total = order.length;
+  const pct = Math.round(score/total*100);
+
+  let html = `
+    <div class="results">
+      <h2>Hoàn thành!</h2>
+      <div class="score-big">${score}/${total}</div>
+      <div class="score-sub">Bạn đã trả lời đúng ${pct}% số câu hỏi.</div>
+  `;
+
+  if(wrongItems.length === 0){
+    html += `<div class="no-wrong">Xuất sắc! Không có câu nào sai.</div>`;
+  } else {
+    html += `<ul class="review-list">`;
+    wrongItems.forEach(item=>{
+      html += `<li><b>${item.term}</b> — ${item.meaning}</li>`;
+    });
+    html += `</ul>`;
+  }
+
+  html += `<button class="restart-btn" onclick="startQuiz()">Làm lại từ đầu</button></div>`;
+
+  document.getElementById('quizCard').innerHTML = html;
+}
+
+startQuiz();
+</script>
+</body>
+</html>
